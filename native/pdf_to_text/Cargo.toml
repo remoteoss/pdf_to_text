@@ -1,0 +1,15 @@
+[package]
+name = "pdf_to_text"
+version = "0.1.0"
+authors = []
+edition = "2021"
+
+[lib]
+name = "pdf_to_text"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.25.0"
+pdf-extract = "0.6.3"
+lopdf = "0.26"

@@ -1,19 +1,50 @@
 use poppler::Document;
-use rustler::Binary;
+use rustler::{Atom, Binary, Encoder, Env, OwnedEnv, Term};
 use std::fs;
+use std::thread;
+
+mod atoms;
 
 #[rustler::nif]
-fn from_path(path: String) -> Result<String, String> {
+fn from_path<'a>(env: Env<'a>, atom: Atom, from: Term<'a>, path: String) -> Atom {
+    let pid = env.pid();
+    let mut thread_env = OwnedEnv::new();
+    let from = thread_env.save(from);
+
+    thread::spawn(move || {
+        thread_env.send_and_clear(&pid, move |env| {
+            convert_result(env, atom, from.load(env), path_to_text(path))
+        });
+    });
+    atoms::ok()
+}
+
+#[rustler::nif]
+fn from_content(env: Env, atom: Atom, from: Term, content: Binary) -> Atom {
+    let pid = env.pid();
+    let content = content.to_owned().expect("failed to allocate memory");
+    let mut thread_env = OwnedEnv::new();
+    let from = thread_env.save(from);
+
+    thread::spawn(move || {
+        thread_env.send_and_clear(&pid, move |env| {
+            convert_result(
+                env,
+                atom,
+                from.load(env),
+                content_to_text(content.as_slice()),
+            )
+        });
+    });
+    atoms::ok()
+}
+
+fn path_to_text(path: String) -> Result<String, String> {
     let data = fs::read(path).map_err(stringify)?;
-    to_text(&data)
+    content_to_text(&data)
 }
 
-#[rustler::nif]
-fn from_content(content: Binary) -> Result<String, String> {
-    to_text(content.as_slice())
-}
-
-fn to_text(data: &[u8]) -> Result<String, String> {
+fn content_to_text(data: &[u8]) -> Result<String, String> {
     let document = Document::from_data(data, None).map_err(stringify)?;
     let mut out = String::new();
     for i in 0..document.n_pages() {
@@ -26,11 +57,20 @@ fn to_text(data: &[u8]) -> Result<String, String> {
     Ok(out)
 }
 
+fn convert_result<'a>(
+    env: Env<'a>,
+    atom: Atom,
+    from: Term,
+    result: Result<String, String>,
+) -> Term<'a> {
+    match result {
+        Ok(text) => (atom, from, (atoms::ok(), text)).encode(env),
+        Err(error) => (atom, from, (atoms::error(), error)).encode(env),
+    }
+}
+
 fn stringify<Displayable: std::fmt::Display>(e: Displayable) -> String {
     format!("{}", e)
 }
 
-rustler::init!("Elixir.PdfToText", [
-    from_path,
-    from_content
-]);
+rustler::init!("Elixir.PdfToText.Native", [from_path, from_content]);

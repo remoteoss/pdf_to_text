@@ -1,5 +1,5 @@
 defmodule Benchmark do
-  @pdf_content ["test", "test_files", "minimal.pdf"] |> Path.join() |> File.read()
+  @pdf_content File.read("test/test_files/minimal.pdf")
 
   def parallel(num) do
     caller = self()

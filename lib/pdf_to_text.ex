@@ -62,7 +62,7 @@ defmodule PdfToText do
   end
 
   defp native_from_content(from, content),
-    do: Native.from_content(:receive_pdf_text, from, content)
+    do: Native.from_content(self(), :receive_pdf_text, from, content)
 
-  defp native_from_path(from, path), do: Native.from_path(:receive_pdf_text, from, path)
+  defp native_from_path(from, path), do: Native.from_path(self(), :receive_pdf_text, from, path)
 end

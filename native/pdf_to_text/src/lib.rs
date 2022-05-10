@@ -1,4 +1,5 @@
 use poppler::Document;
+use rustler::LocalPid;
 use rustler::{Atom, Binary, Encoder, Env, OwnedEnv, Term};
 use std::fs;
 use std::thread;
@@ -6,8 +7,7 @@ use std::thread;
 mod atoms;
 
 #[rustler::nif]
-fn from_path<'a>(env: Env<'a>, atom: Atom, from: Term<'a>, path: String) -> Atom {
-    let pid = env.pid();
+fn from_path(pid: LocalPid, atom: Atom, from: Term, path: String) -> Atom {
     let mut thread_env = OwnedEnv::new();
     let from = thread_env.save(from);
 
@@ -20,8 +20,7 @@ fn from_path<'a>(env: Env<'a>, atom: Atom, from: Term<'a>, path: String) -> Atom
 }
 
 #[rustler::nif]
-fn from_content(env: Env, atom: Atom, from: Term, content: Binary) -> Atom {
-    let pid = env.pid();
+fn from_content(pid: LocalPid, atom: Atom, from: Term, content: Binary) -> Atom {
     let content = content.to_owned().expect("failed to allocate memory");
     let mut thread_env = OwnedEnv::new();
     let from = thread_env.save(from);

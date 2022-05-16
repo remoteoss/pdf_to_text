@@ -21,7 +21,8 @@ defmodule PdfToText.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:rustler, "~> 0.25.0"}
+      {:rustler_precompiled, "~> 0.3"},
+      {:rustler, ">= 0.0.0", optional: true}
     ]
   end
 end

@@ -22,7 +22,8 @@ defmodule PdfToText.MixProject do
   defp deps do
     [
       {:rustler_precompiled, "~> 0.3"},
-      {:rustler, ">= 0.0.0", optional: true}
+      {:rustler, ">= 0.0.0", optional: true},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end

@@ -30,7 +30,4 @@ fn stringify<Displayable: std::fmt::Display>(e: Displayable) -> String {
     format!("{}", e)
 }
 
-rustler::init!("Elixir.PdfToText", [
-    from_path,
-    from_content
-]);
+rustler::init!("Elixir.PdfToText", [from_path, from_content]);

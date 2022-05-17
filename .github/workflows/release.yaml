@@ -55,6 +55,7 @@ jobs:
         case ${{ matrix.job.target }} in
           arm-unknown-linux-*) sudo apt-get -y update ; sudo apt-get -y install gcc-arm-linux-gnueabihf libpoppler-glib-dev;;
           aarch64-unknown-linux-gnu) sudo apt-get -y update ; sudo apt-get -y install gcc-aarch64-linux-gnu libpoppler-glib-dev;;
+          *-linux-*) sudo apt-get -y update ; sudo apt-get -y install libpoppler-glib-dev;;
         esac
 
     - name: Extract crate information

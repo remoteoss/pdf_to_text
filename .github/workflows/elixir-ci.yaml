@@ -62,7 +62,7 @@ jobs:
             _build
           key: ${{ needs.deps.outputs.deps-cache-key }}
 
-      - run: sudo apt-get update && sudo apt-get install -y libpoppler-glib-dev
+      - run: sudo apt-get update && sudo apt-get install -y poppler-dev
 
       - run: mix credo
 
@@ -75,7 +75,7 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-      - run: sudo apt-get update && sudo apt-get install -y libpoppler-glib-dev
+      - run: sudo apt-get update && sudo apt-get install -y poppler-dev
       - run: mix format --check-formatted
 
   dialyzer:
@@ -103,7 +103,7 @@ jobs:
           path: priv/plts
           key: v2-plt-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}
 
-      - run: sudo apt-get update && sudo apt-get install -y libpoppler-glib-dev
+      - run: sudo apt-get update && sudo apt-get install -y poppler-dev
 
       - run: mix dialyzer --plt
         if: steps.plt-cache.outputs.cache-hit != 'true'
@@ -144,6 +144,6 @@ jobs:
             target/
           key: elixir-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - run: sudo apt-get update && sudo apt-get install -y libpoppler-glib-dev
+      - run: sudo apt-get update && sudo apt-get install -y poppler-dev
 
       - run: mix test

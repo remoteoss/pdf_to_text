@@ -7,7 +7,15 @@ defmodule PdfToText.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "PdfToText",
+      source_url: "https://github.com/remoteoss/pdf_to_text",
+      docs: [
+        main: "PdfToText",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -23,6 +31,7 @@ defmodule PdfToText.MixProject do
     [
       {:rustler_precompiled, "~> 0.3"},
       {:rustler, ">= 0.0.0", optional: true},
+      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]

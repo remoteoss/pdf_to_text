@@ -34,7 +34,7 @@ jobs:
           toolchain: stable
           override: true
           default: true
-      - run: sudo apt-get update && sudo apt-get install -y poppler-dev
+      - run: sudo apt-get update && sudo apt-get install -y libpoppler-dev
 
       - run: mix do deps.get, deps.compile
 

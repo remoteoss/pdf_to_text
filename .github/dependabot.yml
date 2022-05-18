@@ -9,7 +9,7 @@ updates:
   reviewers:
   - tessi
 - package-ecosystem: cargo
-  directory: "/native/wasmex"
+  directory: "/native/pdf_to_text"
   schedule:
     interval: daily
     time: "04:00"

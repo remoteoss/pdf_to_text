@@ -7,6 +7,7 @@ defmodule PdfToText.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
+      package: package(),
       deps: deps(),
 
       # Docs
@@ -16,6 +17,30 @@ defmodule PdfToText.MixProject do
         main: "PdfToText",
         extras: ["README.md"]
       ]
+    ]
+  end
+  
+  defp package() do
+    [
+      # These are the default files included in the package
+      files: ~w[
+        lib
+        native/pdf_to_text/src
+        native/pdf_to_text/Cargo.*
+        native/pdf_to_text/README.md
+        native/pdf_to_text/.cargo
+        checksum-Elixir.PdfToText.exs
+        .formatter.exs
+        mix.exs
+        README.md
+        LICENSE.md
+        ],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/remoteoss/pdf_to_text",
+        "Docs" => "https://hexdocs.pm/pdf_to_text"
+      },
+      source_url: "https://github.com/remoteoss/pdf_to_text"
     ]
   end
 

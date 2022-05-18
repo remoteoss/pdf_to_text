@@ -1,7 +1,6 @@
 # PdfToText
 
-Extracts text from a PDF file. Still just an experiment - but might be open
-sourced if we actually end up using it 🎉
+Extracts text from a PDF file. Still just an experiment  🎉
 
 ## Installation
 

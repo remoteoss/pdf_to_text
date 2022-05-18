@@ -19,7 +19,7 @@ defmodule PdfToText.MixProject do
       ]
     ]
   end
-  
+
   defp package() do
     [
       # These are the default files included in the package

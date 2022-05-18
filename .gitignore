@@ -34,3 +34,4 @@ priv/native/libpdf_to_text.so
 # The PLT files for `dialyzer`
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
+/priv/native/*

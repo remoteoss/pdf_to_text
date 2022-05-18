@@ -137,7 +137,7 @@ jobs:
           *-apple-darwin) LIB_FINAL_SUFFIX=".so" ;;
         esac;
 
-        LIB_FINAL_NAME="${LIB_PREFIX}${PROJECT_NAME}-v${PROJECT_VERSION}-nif-${RUSTLER_NIF_VERSION}-${{ matrix.job.target }}${LIB_FINAL_SUFFIX}"
+        LIB_FINAL_NAME="${LIB_PREFIX}${PROJECT_NAME}-${PROJECT_VERSION}-nif-${RUSTLER_NIF_VERSION}-${{ matrix.job.target }}${LIB_FINAL_SUFFIX}"
 
         # Copy lib to final name on this directory
         cp "${LIB_PATH}" "${LIB_FINAL_NAME}"

@@ -13,7 +13,7 @@ defmodule PdfToText do
   use RustlerPrecompiled,
     otp_app: :pdf_to_text,
     crate: "pdf_to_text",
-    base_url: "#{github_url}/releases/download/v#{version}",
+    base_url: "#{github_url}/releases/download/#{version}",
     version: version,
     force_build: System.get_env("PDF_TO_TEXT_BUILD") in ["1", "true"]
 

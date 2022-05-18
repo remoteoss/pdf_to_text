@@ -1,10 +1,12 @@
 defmodule PdfToText.MixProject do
   use Mix.Project
 
+  @version "0.0.1"
+
   def project do
     [
       app: :pdf_to_text,
-      version: "0.0.1",
+      version: @version,
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       package: package(),

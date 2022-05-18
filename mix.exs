@@ -11,9 +11,8 @@ defmodule PdfToText.MixProject do
       start_permanent: Mix.env() == :prod,
       package: package(),
       deps: deps(),
-
-      # Docs
       name: "PdfToText",
+      description: "Converts PDF files into string",
       source_url: "https://github.com/remoteoss/pdf_to_text",
       docs: [
         main: "PdfToText",
@@ -37,7 +36,7 @@ defmodule PdfToText.MixProject do
         README.md
         LICENSE.md
         ],
-      licenses: ["MIT"],
+      licenses: ["GNU GPL v2.0"],
       links: %{
         "GitHub" => "https://github.com/remoteoss/pdf_to_text",
         "Docs" => "https://hexdocs.pm/pdf_to_text"

@@ -1,8 +1,17 @@
 # PdfToText
 
-Extracts text from a PDF file. Still just an experiment  🎉
+Extracts text from a PDF file. Still just an experiment 🎉
+
+## License
+
+Using GPLv2 due to the usage of said license on Poppler.
 
 ## Installation
+
+## Install Rust
+
+Use Rustup to install Rust:
+`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 
 ### Install Poppler
 

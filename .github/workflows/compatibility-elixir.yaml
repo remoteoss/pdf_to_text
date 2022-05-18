@@ -1,0 +1,41 @@
+name: Elixir Compatibility
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  MIX_ENV: test
+  PDF_TO_TEXT_BUILD: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: OTP ${{ matrix.otp }} / Elixir ${{ matrix.elixir }}
+    strategy:
+      fail-fast: false
+      matrix:
+        otp: [22.3, 23.3, 24.3]
+        elixir: [1.12.3, 1.13.3]
+        exclude:
+          - otp: 24.3
+            elixir: 1.10.4
+    steps:
+      - uses: actions/checkout@v2
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          default: true
+      - run: sudo apt-get update && sudo apt-get install -y libpoppler-dev libpoppler-glib-dev libglib2.0-dev
+
+      - run: mix do deps.get, deps.compile
+
+      - run: mix test

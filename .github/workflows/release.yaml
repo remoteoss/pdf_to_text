@@ -55,7 +55,8 @@ jobs:
         case ${{ matrix.job.target }} in
           arm-unknown-linux-*) sudo apt-get -y update ; sudo apt-get -y install gcc-arm-linux-gnueabihf; sudo dpkg --add-architecture armhf; sudo apt-get update || true; sudo apt-get -y install libpoppler-glib-dev:armhf libpoppler-dev:armhf libcairo2-dev:armhf libglib2.0-dev:armhf; export PKG_CONFIG_LIBDIR=/usr/lib/arm-linux-gnueabihf/pkgconfig;;
           aarch64-unknown-linux-gnu) sudo apt-get -y update ; sudo apt-get -y install gcc-aarch64-linux-gnu; sudo dpkg --add-architecture arm64; sudo apt-get update || true; sudo apt-get -y install libpoppler-glib-dev:arm64 libpoppler-dev:arm64 libcairo2-dev:arm64 libglib2.0-dev:arm64;;
-          *apple-darwin) NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; brew install poppler;;
+          aarch64-apple-darwin) NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; brew install gnu-tar poppler; export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH";;
+          x86_64-apple-darwin) NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; brew install poppler;;
           *) sudo apt-get -y update ; sudo apt-get -y install libpoppler-glib-dev libpoppler-dev libcairo2-dev libglib2.0-dev
         esac
 

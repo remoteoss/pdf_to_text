@@ -11,4 +11,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 rustler = "0.25.0"
-poppler-rs = "0.19.0"
+poppler-rs = "0.20.0"
